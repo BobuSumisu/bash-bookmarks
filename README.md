@@ -10,11 +10,14 @@ Add to `.bashrc`:
 
     [[ -f /path/to/bash_bookmarks.sh ]] && . /path/to/bash_bookmarks.sh
 
+If you want bash completion, move `bash_bookmarks_completion.sh` to `/etc/bash_completion.d/`
+(or your OS's equivalent).
+
 ## Usage
 
 Bookmark current working directory with:
 
-    $ bb add home
+    $ bb --add home
     [bb] Bookmark added!
 
 You can now visit it using:
@@ -24,32 +27,29 @@ You can now visit it using:
 
 To see all bookmarks:
 
-    $ bb list
+    $ bb --list
     NAME    PATH
     home    /home/oyvind
 
 And delete a bookmark:
 
-    $ bb delete home
+    $ bb --delete home
     [bb] Bookmark 'home' deleted!
-    $ bb list
+    $ bb --list
     [bb] You do not have any bookmarks yet :(
 
 See usage for more information:
 
-	$ bb
-	Usage:  [<command>] [<name>]
+	$ bb --help
+	Usage: bb [<command>] [<name>]
 
 	Where command is one of:
-		goto <name>     Change directory to a bookmark by name.
-		add <name>      Add a new bookmark with a unique name.
-		delete <name>   Delete a bookmark by name.
-		list            List all bookmarks.
-		help            Show this help message.
+		-g, --goto <name>     Change directory to a bookmark by name.
+		-a, --add <name>      Add a new bookmark with a unique name.
+		-d, --delete <name>   Delete a bookmark by name.
+		-l, --list            List all bookmarks.
+		-h, --help            Show this help message.
 
 	If no command is given, the command defaults to 'goto'
 	and the argument is treated as a bookmark name.
 
-## Limitations
-
-You cannot use the command names as names for bookmarks (i.e.: "goto", "add", "delete", "list" and "help")

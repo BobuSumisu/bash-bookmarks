@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOOKMARKS_FILE=~/.bash_bookmarks
+BASH_BOOKMARKS_FILE=~/.bash_bookmarks
 
 function bb() {
     info() {
@@ -8,15 +8,15 @@ function bb() {
     }
 
     count() {
-        wc -l $BOOKMARKS_FILE | cut -d' ' -f1
+        wc -l $BASH_BOOKMARKS_FILE | cut -d' ' -f1
     }
 
     lookup_by_name() {
-        grep --color=never "^$1:.*$" $BOOKMARKS_FILE
+        grep --color=never "^$1:.*$" $BASH_BOOKMARKS_FILE
     }
 
     lookup_by_path() {
-        grep --color=never "^[^:]\+:$1$" $BOOKMARKS_FILE
+        grep --color=never "^[^:]\+:$1$" $BASH_BOOKMARKS_FILE
     }
 
     get_name() {
@@ -47,7 +47,7 @@ function bb() {
         fi
 
         # All good. Add new bookmark.
-        echo "$1:$(pwd)" >> $BOOKMARKS_FILE
+        echo "$1:$(pwd)" >> $BASH_BOOKMARKS_FILE
         info "Bookmark added!"
 
         return 0
@@ -60,7 +60,7 @@ function bb() {
             return 1
         fi
 
-        sed -i "/$(get_line $bookmark | sed 's|\/|\\/|g')/d" $BOOKMARKS_FILE
+        sed -i "/$(get_line $bookmark | sed 's|\/|\\/|g')/d" $BASH_BOOKMARKS_FILE
         info "Bookmark '$1' deleted!"
 
         return 0
@@ -70,7 +70,7 @@ function bb() {
         if [[ $(count) == 0 ]]; then
             info "You do not have any bookmarks yet :("
         else
-            cat <(echo "NAME:PATH") $BOOKMARKS_FILE | sed 's/:/\t/g' | column -t -s ":"
+            cat <(echo "NAME:PATH") $BASH_BOOKMARKS_FILE | sed 's/:/\t/g' | column -t -s ":"
         fi
     }
 
@@ -89,14 +89,14 @@ function bb() {
 
     usage() {
     cat << EOF
-Usage: $ME [<command>] [<name>]
+Usage: bb [<command>] [<name>]
 
 Where command is one of:
-    goto <name>     Change directory to a bookmark by name.
-    add <name>      Add a new bookmark with a unique name.
-    delete <name>   Delete a bookmark by name.
-    list            List all bookmarks.
-    help            Show this help message.
+    -g, --goto <name>     Change directory to a bookmark by name.
+    -a, --add <name>      Add a new bookmark with a unique name.
+    -d, --delete <name>   Delete a bookmark by name.
+    -l, --list            List all bookmarks.
+    -h, --help            Show this help message.
 
 If no command is given, the command defaults to 'goto'
 and the argument is treated as a bookmark name.
@@ -112,24 +112,24 @@ EOF
     }
 
     # Ensure the bookmarks file exists.
-    if [[ ! -f $BOOKMARKS_FILE ]]; then
-        touch $BOOKMARKS_FILE
+    if [[ ! -f $BASH_BOOKMARKS_FILE ]]; then
+        touch $BASH_BOOKMARKS_FILE
     fi
 
     case $1 in
-        add)
+        -a|--add)
             check_arg $2 && add $2
             ;;
-        delete)
+        -d|--delete)
             check_arg $2 && delete $2
             ;;
-        goto)
+        -g|--goto)
             check_arg $2 && goto $2
             ;;
-        list)
+        -l|--list)
             list
             ;;
-        help)
+        -h|--help)
             usage
             return 0
             ;;
