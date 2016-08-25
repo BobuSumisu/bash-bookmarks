@@ -2,7 +2,6 @@
 
 Simple bash bookmarks with autocompletion.
 
-![bb](bb.gif)
 
 ## Installation
 
@@ -13,6 +12,8 @@ Add to `.bashrc`:
     [[ -f /path/to/bash_bookmarks.sh ]] && . /path/to/bash_bookmarks.sh
 
 ## Usage
+
+![bb](bb.gif)
 
 Bookmark current working directory with:
 
