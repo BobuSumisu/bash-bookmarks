@@ -1,6 +1,6 @@
 # bash-bookmarks
 
-Simple bash bookmarks.
+Simple bash bookmarks with autocompletion.
 
 ## Installation
 
@@ -9,9 +9,6 @@ Simple bash bookmarks.
 Add to `.bashrc`:
 
     [[ -f /path/to/bash_bookmarks.sh ]] && . /path/to/bash_bookmarks.sh
-
-If you want bash completion, move `bash_bookmarks_completion.sh` to `/etc/bash_completion.d/`
-(or your OS's equivalent).
 
 ## Usage
 
