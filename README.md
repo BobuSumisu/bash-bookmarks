@@ -2,6 +2,8 @@
 
 Simple bash bookmarks with autocompletion.
 
+![bb](bb.gif)
+
 ## Installation
 
     $ git clone https://github.com/BobuSumisu/bash-bookmarks.git
@@ -49,4 +51,3 @@ See usage for more information:
 
 	If no command is given, the command defaults to 'goto'
 	and the argument is treated as a bookmark name.
-
